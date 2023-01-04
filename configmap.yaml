@@ -1,0 +1,262 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-schema-init
+data:
+  schema.sql: |
+    -- MariaDB dump 10.19  Distrib 10.8.3-MariaDB, for osx10.16 (x86_64)
+    --
+    -- Host: localhost    Database: demo
+    -- ------------------------------------------------------
+    -- Server version	10.8.3-MariaDB
+    /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+    /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+    /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+    /*!40101 SET NAMES utf8mb4 */;
+    /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+    /*!40103 SET TIME_ZONE='+00:00' */;
+    /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+    /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+    /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+    /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+    --
+    -- Current Database: `demo`
+    --
+    CREATE DATABASE /*!32312 IF NOT EXISTS*/ `demo` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+    USE `demo`;
+    --
+    -- Table structure for table `book`
+    --
+    DROP TABLE IF EXISTS `book`;
+    /*!40101 SET @saved_cs_client     = @@character_set_client */;
+    /*!40101 SET character_set_client = utf8 */;
+    CREATE TABLE `book` (
+      `id` bigint(20) NOT NULL,
+      `amount_comments` int(11) DEFAULT NULL,
+      `author` varchar(255) DEFAULT NULL,
+      `date` date DEFAULT NULL,
+      `description` varchar(1500) DEFAULT NULL,
+      `page` int(11) DEFAULT NULL,
+      `quantity` int(11) DEFAULT NULL,
+      `title` varchar(255) DEFAULT NULL,
+      `url_image` varchar(1500) DEFAULT NULL,
+      `isbn` bigint(20) DEFAULT NULL,
+      `category` varchar(255) DEFAULT NULL,
+      `publisher` varchar(255) DEFAULT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    /*!40101 SET character_set_client = @saved_cs_client */;
+    --
+    -- Dumping data for table `book`
+    --
+    LOCK TABLES `book` WRITE;
+    /*!40000 ALTER TABLE `book` DISABLE KEYS */;
+    INSERT INTO `book` VALUES
+    (1,0,'JK. Rowling','1920-11-02','is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of itemType and scrambled it to make a itemType specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was',200,4,'Harry Potter and the Sorcerer\'s Stone','https://i.kinja-img.com/gawker-media/image/upload/s--AUsfSKba--/c_scale,f_auto,fl_progressive,q_80,w_800/18eqlwy2pur67jpg.jpg',14783,'Fantasy','Mark Twain'),
+    (2,0,'JK. Rowling','1920-11-02','is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of itemType and scrambled it to make a itemType specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was',200,2,'Harry Potter and the Chamber of Secrets','https://m.media-amazon.com/images/I/91OINeHnJGL.jpg',17482,'Fantasy','Mark Twain'),
+    (3,0,'JK. Rowling','1920-11-02','is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of itemType and scrambled it to make a itemType specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was',200,2,'Harry Potter and the Prisioner of Azkaban','https://m.media-amazon.com/images/I/81lAPl9Fl0L.jpg',103049,'Fantasy','Mark Twain'),
+    (4,0,'JK. Rowling','1920-11-02','is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of itemType and scrambled it to make a itemType specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was',200,2,'Harry Potter and the Goblet of Fire','https://m.media-amazon.com/images/I/91gZX7sjnpL.jpg',100284,'Fantasy','Mark Twain'),
+    (5,0,'JK. Rowling','1920-11-02','is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of itemType and scrambled it to make a itemType specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was',200,2,'Harry Potter and the Order of the Phoenix','https://m.media-amazon.com/images/I/91TpLHDnuFL.jpg',409503,'Fantasy','Mark Twain');
+    /*!40000 ALTER TABLE `book` ENABLE KEYS */;
+    UNLOCK TABLES;
+    --
+    -- Table structure for table `comment_id_generator`
+    --
+    DROP TABLE IF EXISTS `comment_id_generator`;
+    /*!40101 SET @saved_cs_client     = @@character_set_client */;
+    /*!40101 SET character_set_client = utf8 */;
+    CREATE TABLE `comment_id_generator` (
+      `next_val` bigint(20) DEFAULT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    /*!40101 SET character_set_client = @saved_cs_client */;
+    --
+    -- Dumping data for table `comment_id_generator`
+    --
+    LOCK TABLES `comment_id_generator` WRITE;
+    /*!40000 ALTER TABLE `comment_id_generator` DISABLE KEYS */;
+    INSERT INTO `comment_id_generator` VALUES
+    (1);
+    /*!40000 ALTER TABLE `comment_id_generator` ENABLE KEYS */;
+    UNLOCK TABLES;
+    --
+    -- Table structure for table `comments`
+    --
+    DROP TABLE IF EXISTS `comments`;
+    /*!40101 SET @saved_cs_client     = @@character_set_client */;
+    /*!40101 SET character_set_client = utf8 */;
+    CREATE TABLE `comments` (
+      `comment_id` bigint(20) NOT NULL AUTO_INCREMENT,
+      `author` varchar(255) DEFAULT NULL,
+      `comment` varchar(255) DEFAULT NULL,
+      `date` date DEFAULT NULL,
+      PRIMARY KEY (`comment_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    /*!40101 SET character_set_client = @saved_cs_client */;
+    --
+    -- Dumping data for table `comments`
+    --
+    LOCK TABLES `comments` WRITE;
+    /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+    /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+    UNLOCK TABLES;
+    --
+    -- Table structure for table `hibernate_sequence`
+    --
+    DROP TABLE IF EXISTS `hibernate_sequence`;
+    /*!40101 SET @saved_cs_client     = @@character_set_client */;
+    /*!40101 SET character_set_client = utf8 */;
+    CREATE TABLE `hibernate_sequence` (
+      `next_val` bigint(20) DEFAULT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    /*!40101 SET character_set_client = @saved_cs_client */;
+    --
+    -- Dumping data for table `hibernate_sequence`
+    --
+    LOCK TABLES `hibernate_sequence` WRITE;
+    /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
+    INSERT INTO `hibernate_sequence` VALUES
+    (12);
+    /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
+    UNLOCK TABLES;
+    --
+    -- Table structure for table `id_generator`
+    --
+    DROP TABLE IF EXISTS `id_generator`;
+    /*!40101 SET @saved_cs_client     = @@character_set_client */;
+    /*!40101 SET character_set_client = utf8 */;
+    CREATE TABLE `id_generator` (
+      `next_val` bigint(20) DEFAULT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    /*!40101 SET character_set_client = @saved_cs_client */;
+    --
+    -- Dumping data for table `id_generator`
+    --
+    LOCK TABLES `id_generator` WRITE;
+    /*!40000 ALTER TABLE `id_generator` DISABLE KEYS */;
+    INSERT INTO `id_generator` VALUES
+    (6);
+    /*!40000 ALTER TABLE `id_generator` ENABLE KEYS */;
+    UNLOCK TABLES;
+    --
+    -- Table structure for table `letter`
+    --
+    DROP TABLE IF EXISTS `letter`;
+    /*!40101 SET @saved_cs_client     = @@character_set_client */;
+    /*!40101 SET character_set_client = utf8 */;
+    CREATE TABLE `letter` (
+      `id` bigint(20) NOT NULL,
+      `amount_comments` int(11) DEFAULT NULL,
+      `author` varchar(255) DEFAULT NULL,
+      `date` date DEFAULT NULL,
+      `description` varchar(1500) DEFAULT NULL,
+      `page` int(11) DEFAULT NULL,
+      `quantity` int(11) DEFAULT NULL,
+      `title` varchar(255) DEFAULT NULL,
+      `url_image` varchar(1500) DEFAULT NULL,
+      `destination` varchar(255) DEFAULT NULL,
+      `origin` varchar(255) DEFAULT NULL,
+      `receiver` varchar(255) DEFAULT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    /*!40101 SET character_set_client = @saved_cs_client */;
+    --
+    -- Dumping data for table `letter`
+    --
+    LOCK TABLES `letter` WRITE;
+    /*!40000 ALTER TABLE `letter` DISABLE KEYS */;
+    INSERT INTO `letter` VALUES
+    (8,0,'JK. Rowling','1920-11-02','is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of itemType and scrambled it to make a itemType specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was',200,2,'Random Letter','https://cdn.enhancv.com/web_developer_cover_letter_example_e54f35295f.jpg','Guadalajara','Atlanta','Criss'),
+    (9,0,'JK. Rowling','1920-11-02','is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of itemType and scrambled it to make a itemType specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was',200,2,'Random Letter 2','https://d1xn1bcogdo8ve.cloudfront.net/2075/image.png','Guadalajara','Guadalajara','Criss');
+    /*!40000 ALTER TABLE `letter` ENABLE KEYS */;
+    UNLOCK TABLES;
+    --
+    -- Table structure for table `library_item_comments`
+    --
+    DROP TABLE IF EXISTS `library_item_comments`;
+    /*!40101 SET @saved_cs_client     = @@character_set_client */;
+    /*!40101 SET character_set_client = utf8 */;
+    CREATE TABLE `library_item_comments` (
+      `item_id` bigint(20) NOT NULL,
+      `comment_id` bigint(20) NOT NULL,
+      UNIQUE KEY `UK_hsjjya2g9cu0esiqbxue0otnb` (`comment_id`),
+      CONSTRAINT `FK70ql7alnwtmoq4h0aee7oq83` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`comment_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    /*!40101 SET character_set_client = @saved_cs_client */;
+    --
+    -- Dumping data for table `library_item_comments`
+    --
+    LOCK TABLES `library_item_comments` WRITE;
+    /*!40000 ALTER TABLE `library_item_comments` DISABLE KEYS */;
+    /*!40000 ALTER TABLE `library_item_comments` ENABLE KEYS */;
+    UNLOCK TABLES;
+    --
+    -- Table structure for table `magazine`
+    --
+    DROP TABLE IF EXISTS `magazine`;
+    /*!40101 SET @saved_cs_client     = @@character_set_client */;
+    /*!40101 SET character_set_client = utf8 */;
+    CREATE TABLE `magazine` (
+      `id` bigint(20) NOT NULL,
+      `amount_comments` int(11) DEFAULT NULL,
+      `author` varchar(255) DEFAULT NULL,
+      `date` date DEFAULT NULL,
+      `description` varchar(1500) DEFAULT NULL,
+      `page` int(11) DEFAULT NULL,
+      `quantity` int(11) DEFAULT NULL,
+      `title` varchar(255) DEFAULT NULL,
+      `url_image` varchar(1500) DEFAULT NULL,
+      `articles` int(11) DEFAULT NULL,
+      `category` varchar(255) DEFAULT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    /*!40101 SET character_set_client = @saved_cs_client */;
+    --
+    -- Dumping data for table `magazine`
+    --
+    LOCK TABLES `magazine` WRITE;
+    /*!40000 ALTER TABLE `magazine` DISABLE KEYS */;
+    INSERT INTO `magazine` VALUES
+    (6,0,'JK. Rowling','1920-11-02','is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of itemType and scrambled it to make a itemType specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was',200,2,'Javascript Funcional','https://arquivo.devmedia.com.br/revistas/front_end/capas/12/capa-revista-front-end-magazine-12-GG.png',30,'Frontend'),
+    (7,0,'JK. Rowling','1920-11-02','is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of itemType and scrambled it to make a itemType specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was',200,4,'Design Responsivo','http://arquivo.devmedia.com.br/revistas/front_end/capas/11/capa-revista-front-end-magazine-11-GG.png',30,'Frontend');
+    /*!40000 ALTER TABLE `magazine` ENABLE KEYS */;
+    UNLOCK TABLES;
+    --
+    -- Table structure for table `newspaper`
+    --
+    DROP TABLE IF EXISTS `newspaper`;
+    /*!40101 SET @saved_cs_client     = @@character_set_client */;
+    /*!40101 SET character_set_client = utf8 */;
+    CREATE TABLE `newspaper` (
+      `id` bigint(20) NOT NULL,
+      `amount_comments` int(11) DEFAULT NULL,
+      `author` varchar(255) DEFAULT NULL,
+      `date` date DEFAULT NULL,
+      `description` varchar(1500) DEFAULT NULL,
+      `page` int(11) DEFAULT NULL,
+      `quantity` int(11) DEFAULT NULL,
+      `title` varchar(255) DEFAULT NULL,
+      `url_image` varchar(1500) DEFAULT NULL,
+      `articles` int(11) DEFAULT NULL,
+      `city` varchar(255) DEFAULT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    /*!40101 SET character_set_client = @saved_cs_client */;
+    --
+    -- Dumping data for table `newspaper`
+    --
+    LOCK TABLES `newspaper` WRITE;
+    /*!40000 ALTER TABLE `newspaper` DISABLE KEYS */;
+    INSERT INTO `newspaper` VALUES
+    (10,0,'JK. Rowling','1920-11-02','is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of itemType and scrambled it to make a itemType specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was',200,2,'The Vintage Newspaper','https://i.pinimg.com/736x/cd/de/e3/cddee3903f85b2307f95e8be6aeda85a.jpg',15,'Guadalajara'),
+    (11,0,'JK. Rowling','1920-11-02','is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of itemType and scrambled it to make a itemType specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was',200,2,'Village News','https://i.pinimg.com/originals/ba/4b/c2/ba4bc2d24d9ac7134c92d3e61863a799.jpg',16,'Chihuahua');
+    /*!40000 ALTER TABLE `newspaper` ENABLE KEYS */;
+    UNLOCK TABLES;
+    /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+    /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+    /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+    /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+    /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+    /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+    /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+    /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+    -- Dump completed on 2022-12-15 14:28:50
